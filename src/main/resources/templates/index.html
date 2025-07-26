@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with Ollama</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #response { white-space: pre-line; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Chat with Ollama</h1>
+    <form id="chatForm">
+        <textarea id="message" rows="4" cols="50" placeholder="Enter your message..."></textarea><br>
+        <button type="submit">Send</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('chatForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const message = document.getElementById('message').value;
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: message
+            });
+            const text = await res.text();
+            document.getElementById('response').innerText = text;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+
+spring:
+  ai:
+    ollama:
+      model: mistral
+      base-url: http://localhost:11434
